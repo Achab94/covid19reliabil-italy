@@ -29,7 +29,7 @@ Di particolare interesse, è la [sezione *Issues*](https://github.com/pcm-dpc/CO
 
 I numeri contenuti all'interno di questa *repository* rappresentano l'immagine ufficiale, scattata quotidianamente sui livelli nazionali, regionali e provinciali, dell'evolvere dell'epidemia e in quanto tale devono necessariamente essere precisi, coerenti e consistenti nel tempo. Trattandosi di **numeri ufficiali**, hanno l'obbligo di non poter ammettere alcun tipo di errore od incosistenza, per due ragioni di fondo: (1) questi dati sono quelli sui quali si svolge il **dibattito pubblico** e si costruiscono le **strategie decisionali** per tentare di arginare la pandemia; (2) questi dati sono la **fotografia** che lasceremo ai posteri di ciò che il nostro paese ha vissuto, giorno per giorno. **In alcun modo possiamo permetterci che questa fotografia sia sbiadita, confusa, illeggibile o di difficile consultazione** e, ancora peggio, che possa esserne messa in discussione la veridicità.
 
-Lo scopo di questo lavoro è quello di fissare alcune delle principali **inconsistenze** ed errori che tutt'oggi, 03 Agosto 2021, esistono all'interno della *repository.* L'intenzione è quella di **sensibilizzare** e portare all'attenzione pubblica il rischio immenso che stiamo correndo: quello di non poter possedere in futuro di uno strumento affidabile che possa permettere di studiare, rappresentare e raccontare quanto vissuto nel nostro paese durante l'evolversi della pandemia. Un qualunque approccio quantitativo, presente o futuro, necessita infatti la disponibilità di **dati**, ovvero numeri che abbiano una loro interpretabilità, validità e coerenza nel tempo. 
+Lo scopo di questo lavoro è quello di fissare alcune delle principali **inconsistenze** ed errori che tutt'oggi, 04 Agosto 2021, esistono all'interno della *repository.* L'intenzione è quella di **sensibilizzare** e portare all'attenzione pubblica il rischio immenso che stiamo correndo: quello di non poter possedere in futuro di uno strumento affidabile che possa permettere di studiare, rappresentare e raccontare quanto vissuto nel nostro paese durante l'evolversi della pandemia. Un qualunque approccio quantitativo, presente o futuro, necessita infatti la disponibilità di **dati**, ovvero numeri che abbiano una loro interpretabilità, validità e coerenza nel tempo. 
 
 Nel seguito, presento alcuni grafici che permettono di comprendere immediatamente alcune delle falle principali tutt'ora presenti nei dati ufficiali, allegando un commento personale. Il **focus** è unicamente sul **livello nazionale**, coi dati collezionati nel dataset `dpc-covid19-ita-andamento-nazionale.csv`, ma molte delle incongruenze hanno origine nei rispettivi sotto-livelli regionali e provinciali. 
 
@@ -75,19 +75,15 @@ La spiegazione motiva il dato anomalo, evidenziando peraltro un gravissimo error
 
 Questo inserimento ha un effetto di inconsistenza anche sulle altre variabili collegate contenute all'interno del dataset: si veda ad esempio il grafico qui sopra che rappresenta la **variazione giornaliera sul numero totale dei pazienti positivi in un tale giorno**.
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
-
-Allo stesso modo, sembra esserci un effetto spurio di differenziazione sul numero di pazienti dimessi e/o guariti a seconda del giorno della settimana: così come nel weekend *"si tende a morire di meno di Covid-19"*, allo stesso modo *"si tende a guarire anche di meno"*.
-
 ## Tamponi eseguiti e casi testati
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 Un'altra variabile che è stata al centro del dibattito pubblico, in particolare durante la seconda ondata dell'epidemia, riguarda il **numero di tamponi effettuati ogni giorno**. Il grafico mostra l'evoluzione temporale di tale numero e, di nuovo, evidenzia un dato del tutto anomalo per questa variabile in data 17 Dicembre 2020, nella quale sarebbero stati eseguiti -47510 tamponi. Nessuna spiegazione viene data nelle note ufficiali della *repository* che, curiosamente, per quel giorno addirittura non esistono.
 
 E' anche evidente un **cambio di regime** sul trend generale, avvenuto a metà Gennaio 2021 con l'introduzione nel conteggio del numero di tamponi effettuati dei test antigenici (i cosiddetti *tamponi rapidi*). In questo caso, la scelta dei manutentori della *repository* è stata quella di introdurre due nuove variabili, `tamponi_test_molecolare` e `tamponi_test_antigenico_rapido`, che a partire da quel momento conteggiassero quanti dei tamponi giornalieri effettuati appartenessero all'una o all'altra tipologia. Una scelta più corretta e coerente sarebbe stata dunque quella di eliminare la variable `tamponi`, aggregando i suoi valori precedenti alla metà di Gennaio 2021 alla variabile `tamponi_test_molecolare` (che in tal periodo ha entrate `NA`), ed introducendo come è stato fatto la variabile `tamponi_test_antigenico_rapido` che per sua natura ha iniziato il suo conteggio in tale periodo. L'attuale variabile `tamponi` sarebbe ugualmente ottenibile dalla somma delle due, e rischia di creare **inutile confusione**.
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 Un fenomeno ancora più emblematico si verifica andando ad osservare il **numero giornaliero dei soggetti testati**, il cui monitoraggio è stato introdotto a partire dalla metà di Aprile 2020 e che per facilità mostro a partire da Maggio 2020. Nelle date 05 Dicembre 2020 e 06 Dicembre 2020, i dati ufficiali riportano che sono stati testati, rispettivamente, 894721 e -732995 casi. Questi numeri sono chiaramente privi di qualunque fondamento, per una variabile che per sua natura **non può assumere valori negativi** (si veda anche il dato anomalo in data 18 Dicembre 2020) e su una scala totalmente diversa rispetto all'andamento giornaliero, come si può notare dal grafico stesso.
 
@@ -107,7 +103,7 @@ Una spiegazione del tutto insiddisfacente: ad esempio, a quanto corrisponde il r
 
 Una variabile che ha creato grande confusione riguarda il **conteggio dei soggetti positivi al virus**. Il dataset correttamente distingue due conteggi: la variabile `totale_casi`, che rappresenta la somma aggregata del numero di soggetti che hanno contratto il virus entro un tal giorno, e la variabile `totale_positivi`, che rappresenta il numero di soggetti che in un tal giorno sono *ancora* positivi al virus. Relativamente alla variabile `totale_positivi`, a partire dalla metà di Gennaio 2021 sono state anche introdotte due ulteriori variabili (`totale_positivi_test_molecolare` e `totale_positivi_test_antigenico_rapido`) che contano, quotidianamente, quanti dei pazienti sono stati rilevati positivi mediante test molecolare o test antigenico rapido. 
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 E' di particolare interesse andare ad utilizzare questa distinzione nel conteggio per rapportarla con il numero di test molecolari e test antigenici rapidi, rispettivamente, ed ottenere un'**approssimazione dell'incidenza giornaliera alle due diverse tipologie di tampone**. Il grafico mostra l'evoluzione delle due serie storiche, con una marcata differenza nei due tassi di incidenza spiegabile dal fatto che la positività ad un test antigenico rapido deve essere confermata con un test molecolare. Evidenziamo due dati del tutto anomali: il tasso di incidenza dei positivi al test molecolare in data 22 Marzo 2021 e quello dei positivi al test antigenico rapido in data 24 Giugno 2021. 
 
@@ -123,7 +119,7 @@ In entrambi i casi, si tratta di errori derivanti da riconteggi/riallocamenti ch
 
 ## Il conteggio dei pazienti ricoverati in terapia intensiva
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 Un'altra variabile di notevole importanza per capire l'andamento dell'impatto di ciascuna ondata epidemica riguarda il **conteggio dei pazienti ricoverati in terapia intensiva**. Nel grafico mostriamo la variazione giornaliera di tale numero: un valore positivo significa che in quel giorno sono entrate più persone in terapia intensiva di quante non ne sono uscite e, al contrario, un valore negativo significa che in quel giorno sono uscire più persone in terapia intensiva di quante non ne siano entrate. Per chiarità, puntualizzo che *l'uscita* corrisponde sia ad una guarigione/dimissione, che al decesso. 
 
@@ -135,7 +131,7 @@ Si tratta dunque di un errore noto, dei quali ci si è accorti e si è consapevo
 
 ## Il conteggio dei positivi in isolamento domiciliare
 
-<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="CovidReliabiliItaly_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
 In modo simile, andiamo a considerare il **saldo giornaliero dei soggetti positivi al virus che rimangono in auto-isolamento domiciliare**, ovvero che non vengono ospedalizzati. Il dato anomalo riguarda la data 15 Giugno 2021, la cui spiegazione è già stata affrontata nella sezione *L'evoluzione dei dimessi e guariti giornalieri*.
 
@@ -145,7 +141,7 @@ Gli esempi mostrati in questo approfondimento sono solo alcuni dei casi più lam
 
 Come ho cercato di mostrare, in alcuni casi è possibile ricostruire una spiegazione riguardante l'esistenza di dati con valori anomali rispetto al loro trend storico e/o valori che fuoriescono dal dominio di definizione della variabile stessa. La spiegazione deve essere scovata all'interno delle note, che peraltro sono **redatte in italiano** (quindi del tutto inconsultabili dall'intera comunità scientifica internazionale), e certamente non sono di immmediata lettura e consultazione.
 
-**In ogni caso, saper dare una spiegazione non significa accettare di conseguenza che questi dati siano una rappresentazione soddisfacente dell'evoluzione della pandemia in Italia**. Nonostante sia apprezzabile lo sforzo messo in atto dalla Presidenza del Consiglio dei Ministri e dal Dipartimento di Protezione Civile per rendere pubblicamente disponibili, con frequenza quotidiana, i *nuovi numeri dell'epidemia*, mi chiedo se questa scelta sia realizzabile in modo soddisfacente alla luce dei troppi errori di comunicazione, conteggio, consolidamento che gli uffici regionali e/o provinciali commetto e se, invece, non fosse più corretto pubblicare i dati giornalieri a distanza di qualche giorno e solo dopo aver realizzato un'opportuna attività di controllo del dato, consolidamento ed eventuale modifica rispetto ad errori di conteggio e/o trasmissione segnalati nei giorni successivi. 
+**In ogni caso, saper dare una spiegazione non significa accettare di conseguenza che questi dati siano una rappresentazione soddisfacente dell'evoluzione della pandemia in Italia**. Nonostante sia apprezzabile lo sforzo messo in atto dalla Presidenza del Consiglio dei Ministri e dal Dipartimento di Protezione Civile per rendere pubblicamente disponibili, con frequenza quotidiana, i *nuovi numeri dell'epidemia*, mi chiedo se questa scelta sia realizzabile in modo soddisfacente alla luce dei troppi errori di comunicazione, conteggio, consolidamento che gli uffici regionali e/o provinciali commettono e se, invece, non fosse più corretto pubblicare i dati giornalieri a distanza di qualche giorno e solo dopo aver realizzato un'opportuna attività di controllo del dato, consolidamento ed eventuale modifica rispetto ad errori di conteggio e/o trasmissione segnalati nei giorni successivi. 
 
 Mi chiedo anche se, alla luce di alcuni degli esempi mostrati in questo approfondimento, sia davvero così necessario possedere il dato quotidiano per alcune delle variabili contenute all'interno del dataset. Mi riferisco ad esempio al conteggio dei tamponi effettuati e dei casi testati quotidianamente, due variabili per le quali è ben noto (ed evidente dai grafici che ho mostrato) una stagionalità di tipo settimanale che abbassa il loro conteggio nei giorni del fine settimana, in cui molte farmacie e hub sono chiusi al pubblico. Che senso ha possedere il numero di tamponi effettuati il martedì e la domenica, se questi due giorni non sono per nulla paragonabili? Non sarebbe meglio possedere il dato aggregato della settimana, o pubblicare il dato al quale è stato effettuato un lisciamento tramite media mobile o tecniche affini?
 

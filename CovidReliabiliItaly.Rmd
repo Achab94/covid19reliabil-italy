@@ -173,21 +173,6 @@ ggplot(aes(x=data, y=variazione_totale_positivi)) +
 
 Questo inserimento ha un effetto di inconsistenza anche sulle altre variabili collegate contenute all'interno del dataset: si veda ad esempio il grafico qui sopra che rappresenta la **variazione giornaliera sul numero totale dei pazienti positivi in un tale giorno**.
 
-```{r, echo=FALSE}
-dati_nazionali %>%
-  filter(data > as.Date("2020-10-01")) %>%
-  ggplot(aes(x=data, y=delta_dimessi_guariti, color=(weekdays(data) %in% c("Sabato", "Domenica", "Lunedì")))) +
-  geom_line(size=ggp2_line_size, color="black") +
-  geom_point(size=1.5) +
-  scale_x_date(date_breaks = "month", minor_breaks = "month",  date_labels = "%b %Y") +
-  scale_color_brewer(name="Giorno della settimana", labels=c("Mar, Mer, Gio, Ven", "Sab, Dom, Lun"), palette = "Set1") +
-  theme(axis.title.x=element_blank(),
-        axis.title.y=element_blank(),
-        legend.position = "bottom")
-```
-
-Allo stesso modo, sembra esserci un effetto spurio di differenziazione sul numero di pazienti dimessi e/o guariti a seconda del giorno della settimana: così come nel weekend *"si tende a morire di meno di Covid-19"*, allo stesso modo *"si tende a guarire anche di meno"*.
-
 ## Tamponi eseguiti e casi testati
 
 ```{r, echo=FALSE}
@@ -316,7 +301,7 @@ Gli esempi mostrati in questo approfondimento sono solo alcuni dei casi più lam
 
 Come ho cercato di mostrare, in alcuni casi è possibile ricostruire una spiegazione riguardante l'esistenza di dati con valori anomali rispetto al loro trend storico e/o valori che fuoriescono dal dominio di definizione della variabile stessa. La spiegazione deve essere scovata all'interno delle note, che peraltro sono **redatte in italiano** (quindi del tutto inconsultabili dall'intera comunità scientifica internazionale), e certamente non sono di immmediata lettura e consultazione.
 
-**In ogni caso, saper dare una spiegazione non significa accettare di conseguenza che questi dati siano una rappresentazione soddisfacente dell'evoluzione della pandemia in Italia**. Nonostante sia apprezzabile lo sforzo messo in atto dalla Presidenza del Consiglio dei Ministri e dal Dipartimento di Protezione Civile per rendere pubblicamente disponibili, con frequenza quotidiana, i *nuovi numeri dell'epidemia*, mi chiedo se questa scelta sia realizzabile in modo soddisfacente alla luce dei troppi errori di comunicazione, conteggio, consolidamento che gli uffici regionali e/o provinciali commetto e se, invece, non fosse più corretto pubblicare i dati giornalieri a distanza di qualche giorno e solo dopo aver realizzato un'opportuna attività di controllo del dato, consolidamento ed eventuale modifica rispetto ad errori di conteggio e/o trasmissione segnalati nei giorni successivi. 
+**In ogni caso, saper dare una spiegazione non significa accettare di conseguenza che questi dati siano una rappresentazione soddisfacente dell'evoluzione della pandemia in Italia**. Nonostante sia apprezzabile lo sforzo messo in atto dalla Presidenza del Consiglio dei Ministri e dal Dipartimento di Protezione Civile per rendere pubblicamente disponibili, con frequenza quotidiana, i *nuovi numeri dell'epidemia*, mi chiedo se questa scelta sia realizzabile in modo soddisfacente alla luce dei troppi errori di comunicazione, conteggio, consolidamento che gli uffici regionali e/o provinciali commettono e se, invece, non fosse più corretto pubblicare i dati giornalieri a distanza di qualche giorno e solo dopo aver realizzato un'opportuna attività di controllo del dato, consolidamento ed eventuale modifica rispetto ad errori di conteggio e/o trasmissione segnalati nei giorni successivi. 
 
 Mi chiedo anche se, alla luce di alcuni degli esempi mostrati in questo approfondimento, sia davvero così necessario possedere il dato quotidiano per alcune delle variabili contenute all'interno del dataset. Mi riferisco ad esempio al conteggio dei tamponi effettuati e dei casi testati quotidianamente, due variabili per le quali è ben noto (ed evidente dai grafici che ho mostrato) una stagionalità di tipo settimanale che abbassa il loro conteggio nei giorni del fine settimana, in cui molte farmacie e hub sono chiusi al pubblico. Che senso ha possedere il numero di tamponi effettuati il martedì e la domenica, se questi due giorni non sono per nulla paragonabili? Non sarebbe meglio possedere il dato aggregato della settimana, o pubblicare il dato al quale è stato effettuato un lisciamento tramite media mobile o tecniche affini?
 
